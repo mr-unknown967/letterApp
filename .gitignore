@@ -64,6 +64,3 @@ run-dev.template.ps1
 server/public
 vite.config.ts.*
 *.tar.gz
-
-# Deployment
-render.yaml
