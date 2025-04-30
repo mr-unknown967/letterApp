@@ -1,12 +1,11 @@
 {
   "version": 2,
-  "rootDirectory": "frontend",
   "builds": [
     {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "npm run vercel-build",
+        "buildCommand": "npm run build",
         "outputDirectory": "frontend/dist",
         "installCommand": "npm install --legacy-peer-deps"
       }
