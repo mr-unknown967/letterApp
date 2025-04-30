@@ -28,7 +28,8 @@ const port = process.env.PORT || 3000;
 // CORS configuration
 const allowedOrigins = [
   'http://localhost:5173', // Development
-  'https://your-vercel-app.vercel.app' // Production - replace with your Vercel URL
+  'https://your-vercel-app.vercel.app', // Production - replace with your Vercel URL
+  'https://letter-app-backend.onrender.com' // Render URL
 ];
 
 app.use(cors({
