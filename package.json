@@ -15,7 +15,7 @@
     "build:backend": "cd backend && npm run build",
     "start": "cd backend && npm run start",
     "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
-    "vercel-build": "cd frontend && npm install --legacy-peer-deps --ignore-workspace-root-check && npm run build"
+    "vercel-build": "cd frontend && npm install --no-workspaces --legacy-peer-deps && npm run build"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

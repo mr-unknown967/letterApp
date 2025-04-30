@@ -8,7 +8,7 @@
       "config": {
         "buildCommand": "npm run vercel-build",
         "outputDirectory": "frontend/dist",
-        "installCommand": "npm install --legacy-peer-deps --ignore-workspace-root-check"
+        "installCommand": "npm install --no-workspaces --legacy-peer-deps"
       }
     },
     {
