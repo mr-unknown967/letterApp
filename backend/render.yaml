@@ -2,7 +2,7 @@ services:
   - type: web
     name: letter-app-backend
     env: node
-    buildCommand: npm run build
+    buildCommand: npm install && npm run build
     startCommand: npm start
     rootDir: backend
     envVars:
