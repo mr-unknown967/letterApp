@@ -3,7 +3,6 @@
   "buildCommand": "npm install --omit=optional --no-audit --no-fund && npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "nodeVersion": "18.x",
   "routes": [
     {
       "src": "/(.*)",
