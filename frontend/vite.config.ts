@@ -29,6 +29,12 @@ export default defineConfig({
       output: {
         manualChunks: undefined
       }
+    },
+    commonjsOptions: {
+      include: [/node_modules/]
     }
+  },
+  ssr: {
+    noExternal: ['@rollup/rollup-linux-x64-gnu']
   }
 });
