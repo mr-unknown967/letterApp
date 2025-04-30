@@ -1,9 +1,10 @@
 services:
   - type: web
-    name: letter-backend
+    name: letter-app-backend
     env: node
-    buildCommand: npm install && npm run build
+    buildCommand: npm run build
     startCommand: npm start
+    rootDir: backend
     envVars:
       - key: NODE_ENV
         value: production
@@ -16,4 +17,8 @@ services:
       - key: RECEIVER_EMAIL
         sync: false
       - key: SESSION_SECRET
+        sync: false
+      - key: VALID_USERNAMES
+        sync: false
+      - key: USER_DOB
         sync: false 

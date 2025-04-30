@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc && mkdir -p dist/models dist/storage && [ -d storage ] && cp -r storage/* dist/storage/ || true",
+    "build": "rm -rf dist && tsc && mkdir -p dist/models dist/storage && cp -r src/models/* dist/models/ && [ -d storage ] && cp -r storage/* dist/storage/ || true",
     "start": "node dist/index.js"
   },
   "dependencies": {
@@ -30,6 +30,10 @@
     "drizzle-kit": "^0.20.14",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "main": "index.js",
   "keywords": [],
