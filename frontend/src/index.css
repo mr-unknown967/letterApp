@@ -1,0 +1,670 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+:root {
+  --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 346.8 77.2% 49.8%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 346.8 77.2% 49.8%;
+  --radius: 0.5rem;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: rgba(0, 0, 0, 0.1);
+  --glass-radius: 1rem;
+}
+
+.dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 346.8 77.2% 49.8%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+  --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+    --ring: 346.8 77.2% 49.8%;
+}
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Modern scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary-200));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary-300));
+  }
+}
+
+/* Custom fonts */
+.font-dancing {
+  font-family: 'Dancing Script', cursive;
+}
+
+.font-sans {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Custom animations */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .animate-fade-in-slow {
+    animation: fadeIn 1.8s ease-in-out;
+  }
+  
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+  
+  .delay-500 {
+    animation-delay: 0.5s;
+  }
+  
+  .delay-700 {
+    animation-delay: 0.7s;
+  }
+  
+  .delay-900 {
+    animation-delay: 0.9s;
+  }
+  
+  .delay-1200 {
+    animation-delay: 1.2s;
+  }
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes float {
+  0% { 
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% { 
+    transform: translateY(-10px) rotate(5deg) scale(1.05);
+  }
+  100% { 
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes floatUp {
+  0% { 
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-60vh) scale(1.2);
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% { 
+    transform: translateY(-120vh) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Input container styles */
+.input-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+  perspective: 1000px;
+}
+
+.form-input {
+  @apply w-full px-4 py-3 bg-white bg-opacity-80 border-2 rounded-lg transition-all duration-300;
+  transform-style: preserve-3d;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  border-color: #ffd1dc;
+}
+
+/* Ensure border color remains static in focus state */
+.form-input:focus {
+  @apply outline-none ring-2 ring-primary ring-opacity-50 bg-opacity-100;
+  transform: translateY(-2px) translateZ(0);
+  box-shadow: 
+    0 10px 20px -10px rgba(236, 72, 153, 0.3),
+    0 0 15px rgba(236, 72, 153, 0.1);
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  border-color: #ffd1dc;
+}
+
+/* Modify hover behavior for date input */
+input[type="date"].form-input:hover::before {
+  opacity: 0;
+}
+
+.form-input:not([type="date"]):hover::before {
+  opacity: 0.5;
+}
+
+.floating-label {
+  @apply absolute pointer-events-none transition-all duration-300 text-sm;
+  left: 1rem;
+  top: 50%;
+  transform-origin: 0 0;
+  transform: translateY(-50%) scale(1);
+  background: linear-gradient(90deg, #ec4899 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0.8;
+  letter-spacing: 0.02em;
+  padding: 0 0.25rem;
+  z-index: 1;
+}
+
+.form-input:focus ~ .floating-label,
+.form-input:not(:placeholder-shown) ~ .floating-label {
+  @apply text-xs font-medium;
+  top: 0;
+  transform: translateY(-50%) scale(0.85);
+  opacity: 1;
+  background: linear-gradient(90deg, #db2777 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 1px rgba(236, 72, 153, 0.1);
+}
+
+/* Remove white background from floating label */
+.form-input:focus ~ .floating-label::before,
+.form-input:not(:placeholder-shown) ~ .floating-label::before {
+  display: none;
+}
+
+/* Date input styling */
+.input-container input[type="date"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 2px solid #ffd1dc;
+  border-radius: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  color: #374151;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Ensure date input border color remains static in focus state */
+.input-container input[type="date"]:focus {
+  border-color: #ffd1dc;
+  outline: none;
+  box-shadow: 0 10px 20px -10px rgba(236, 72, 153, 0.3),
+              0 0 15px rgba(236, 72, 153, 0.1);
+}
+
+/* Hide default date placeholder */
+.input-container input[type="date"]::-webkit-datetime-edit-text,
+.input-container input[type="date"]::-webkit-datetime-edit-month-field,
+.input-container input[type="date"]::-webkit-datetime-edit-day-field,
+.input-container input[type="date"]::-webkit-datetime-edit-year-field {
+  color: transparent;
+}
+
+/* Show date placeholder when focused or filled */
+.input-container input[type="date"]:focus::-webkit-datetime-edit-text,
+.input-container input[type="date"]:focus::-webkit-datetime-edit-month-field,
+.input-container input[type="date"]:focus::-webkit-datetime-edit-day-field,
+.input-container input[type="date"]:focus::-webkit-datetime-edit-year-field,
+.input-container input[type="date"]:valid::-webkit-datetime-edit-text,
+.input-container input[type="date"]:valid::-webkit-datetime-edit-month-field,
+.input-container input[type="date"]:valid::-webkit-datetime-edit-day-field,
+.input-container input[type="date"]:valid::-webkit-datetime-edit-year-field {
+  color: #374151;
+}
+
+/* Date label styling */
+.input-container input[type="date"] ~ .floating-label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, #ec4899 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 0.875rem;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+}
+
+/* Move label up when focused or filled */
+.input-container input[type="date"]:focus ~ .floating-label,
+.input-container input[type="date"]:valid ~ .floating-label {
+  top: 0;
+  transform: translateY(-50%) scale(0.85);
+  opacity: 1;
+  background: linear-gradient(90deg, #db2777 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Calendar picker styling */
+.input-container input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.input-container input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Enhanced input animations */
+.form-input {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-input:hover:not(:focus) {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px -5px rgba(236, 72, 153, 0.2);
+}
+
+/* Glass effect for inputs */
+.form-input {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Add subtle pulse on focus */
+@keyframes subtle-pulse {
+  0%, 100% {
+    box-shadow: 0 10px 20px -10px rgba(236, 72, 153, 0.3),
+                0 0 15px rgba(236, 72, 153, 0.1);
+  }
+  50% {
+    box-shadow: 0 10px 25px -8px rgba(236, 72, 153, 0.4),
+                0 0 20px rgba(236, 72, 153, 0.15);
+  }
+}
+
+.form-input:focus {
+  animation: subtle-pulse 3s infinite;
+}
+
+/* Enhanced shimmer effect */
+@keyframes enhanced-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.form-input:focus {
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 1) 25%,
+    rgba(236, 72, 153, 0.05) 35%,
+    rgba(255, 255, 255, 1) 45%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  background-size: 200% 100%;
+  animation: enhanced-shimmer 3s linear infinite;
+}
+
+/* Hide placeholder by default and show on focus */
+.form-input::placeholder {
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+.form-input:focus::placeholder {
+  color: #9CA3AF;
+  transform: translateX(0);
+  transition: all 0.3s ease;
+}
+
+/* Ensure proper z-indexing for the form elements */
+.form-input {
+  position: relative;
+  z-index: 0;
+}
+
+.form-input:focus {
+  z-index: 1;
+}
+
+/* Heart background decoration */
+.heart-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.12;
+  animation: heartBgPulse 4s ease-in-out infinite;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 1024' fill='%23ec4899'%3E%3Cpath d='M100,200 C100,100 175,50 250,50 C325,50 350,100 400,150 C450,100 475,50 550,50 C625,50 700,100 700,200 C700,300 600,400 400,600 L400,600 C200,400 100,300 100,200 Z' transform='scale(1.5)' /%3E%3Cpath d='M700,500 C700,400 775,350 850,350 C925,350 950,400 1000,450 C1050,400 1075,350 1150,350 C1225,350 1300,400 1300,500 C1300,600 1200,700 1000,900 L1000,900 C800,700 700,600 700,500 Z' transform='scale(0.8)' /%3E%3Cpath d='M400,700 C400,600 475,550 550,550 C625,550 650,600 700,650 C750,600 775,550 850,550 C925,550 1000,600 1000,700 C1000,800 900,900 700,1100 L700,1100 C500,900 400,800 400,700 Z' transform='scale(1.2)' /%3E%3C/svg%3E");
+}
+
+@keyframes heartBgPulse {
+  0%, 100% {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.18;
+    transform: scale(1.02);
+  }
+}
+
+/* Button hover effect */
+.hover-scale {
+  transition: all 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.animate-spin {
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.animate-ping {
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Confetti explosion animation */
+@keyframes confettiExplode {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(-10px) translateX(0) scale(1);
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(-1 * var(--random-distance, 50vh))) translateX(calc(var(--random-direction, 1) * var(--random-spread, 100px))) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes confettiRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .animate-fade-in, .animate-fade-in-slow, .animate-float, .animate-pulse, .animate-spin, .animate-ping {
+    animation: none !important;
+  }
+  
+  [style*="animation"] {
+    animation: none !important;
+  }
+}
+
+/* Glass Card Effect */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px 0 rgba(31, 38, 135, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  border-radius: var(--glass-radius);
+  position: relative;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: var(--glass-radius);
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.1)
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  filter: blur(4px);
+}
+
+/* Card content wrapper to ensure content is above the blur */
+.card-content-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced Button Styles */
+.btn-primary {
+  @apply relative overflow-hidden transition-all duration-300 transform hover:scale-105 active:scale-95;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary-600)) 0%,
+    hsl(var(--secondary-600)) 100%
+  );
+}
+
+.btn-primary::before {
+  content: '';
+  @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary-700)) 0%,
+    hsl(var(--secondary-700)) 100%
+  );
+}
+
+.btn-primary:hover::before {
+  @apply opacity-100;
+}
+
+/* Enhanced Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  @apply relative w-8 h-8;
+}
+
+.loading-spinner::before,
+.loading-spinner::after {
+  content: '';
+  @apply absolute inset-0 rounded-full;
+  border: 4px solid transparent;
+}
+
+.loading-spinner::before {
+  @apply border-t-primary border-r-primary animate-spin;
+}
+
+.loading-spinner::after {
+  @apply border-b-secondary border-l-secondary animate-spin;
+  animation-direction: reverse;
+  animation-duration: 1.5s;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-4px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Enhanced shimmer effect */
+@keyframes enhanced-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.animate-enhanced-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: enhanced-shimmer 2s infinite;
+}

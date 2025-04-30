@@ -1,0 +1,39 @@
+{
+  "name": "letter",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && npm run build",
+    "start": "cd backend && npm run start",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "description": "A beautiful web application for sending a special message and collecting responses.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moiz26/letter.git"
+  },
+  "keywords": [
+    "react",
+    "express",
+    "typescript",
+    "letter"
+  ],
+  "author": "Mohammed Moiz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moiz26/letter/issues"
+  },
+  "homepage": "https://github.com/moiz26/letter#readme"
+}

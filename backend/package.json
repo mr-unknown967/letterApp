@@ -1,0 +1,39 @@
+{
+  "name": "letter-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc && mkdir -p dist/models dist/storage && [ -d storage ] && cp -r storage/* dist/storage/ || true",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.7.0",
+    "better-sqlite3": "^9.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "drizzle-orm": "^0.29.3",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.0",
+    "nodemailer": "^6.9.9",
+    "pg": "^8.11.3",
+    "url": "^0.11.3",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.9",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.16",
+    "@types/nodemailer": "^6.4.14",
+    "@types/pg": "^8.11.0",
+    "drizzle-kit": "^0.20.14",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  },
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
