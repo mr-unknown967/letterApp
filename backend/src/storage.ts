@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Response, ResponseType } from './models/Response';
+import { Response, ResponseType } from './models/Response.js';
 
 export async function connectDB() {
   try {
