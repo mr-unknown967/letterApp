@@ -34,6 +34,9 @@ export default defineConfig({
       include: [/node_modules/]
     }
   },
+  ssr: {
+    noExternal: ['@rollup/rollup-linux-x64-gnu']
+  },
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   }
