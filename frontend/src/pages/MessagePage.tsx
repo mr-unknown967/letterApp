@@ -6,7 +6,7 @@ import { Heart } from "lucide-react";
 
 const MessagePage = () => {
   const [, navigate] = useLocation();
-  const [name, setName] = useState("");
+  const [, setName] = useState("");
   const [visibleParagraphs, setVisibleParagraphs] = useState(0);
   const [showButton, setShowButton] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -52,10 +52,17 @@ const MessagePage = () => {
   
   // Custom message for Zubiyah
   const paragraphs = [
-    <>Dear <span className="font-medium text-primary-700">zubiyah</span>,</>,
-    "This is not just a message. It's a feeling that couldn't be kept hidden.",
-    "Maybe this is strange, maybe it's sudden... but it's real.",
-    "From the one whose heart skips when you smile."
+    <span className="font-semibold">"Assalam walaikum."</span>,
+    "Actually, this was meant to be a love letter, but somehow, it turned into an apology",
+    "I'm truly sorry for the things I did,I'm sorry for the things I said,",
+    "Agar kabhi aap ka dil dukhaya  hoon,",
+    "Ya phir mere wajha se kabhi bhi aapke friends ke samne aapko awkward ya embarrassed feel hua to sorry",
+    "Ye sab karne ka mera intension nai tha,",
+    "I just wanted to confess my feelings.",
+    "Aap ki mohabbat nai mili to kya hua, isse aapke liye meri mohabbat to khatam nai hogi",
+    "Aap jaha bhi raho khush raho, bas yehi dua hai,",
+    <span className="font-semibold">Just a humble request—if your heart allows, please read the next page once</span>,
+    "From someone who never stopped admiring you — even from afar."
   ];
   
   return (
@@ -221,12 +228,12 @@ const MessagePage = () => {
           <Heart className="h-16 w-16 text-primary-200" fill="currentColor" />
         </div>
         
-        <CardContent className="p-8 relative card-content-wrapper">
-          <div className="text-center mb-8 animate-fade-in">
-            <h2 className="font-dancing text-4xl font-bold text-pink-700 mb-1">A Message From the Heart</h2>
+        <CardContent className="p-6 relative card-content-wrapper">
+          <div className="text-center mb-4 animate-fade-in">
+            <h2 className="font-dancing text-4xl font-bold text-pink-700 mb-1">An Apology From the Heart</h2>
           </div>
           
-          <div className="space-y-6 min-h-[220px]">
+          <div className="space-y-3 min-h-[220px]">
             {paragraphs.map((paragraph, index) => (
               <p 
                 key={index} 

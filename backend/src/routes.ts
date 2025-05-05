@@ -175,7 +175,7 @@ router.put('/track/:id', async (req, res) => {
 });
 
 // Validation route
-router.post('/validate', (req, res) => {
+router.post('/validate', async (req, res) => {
     const { name, dob } = req.body;
   
   // Clean and normalize the submitted name
@@ -224,6 +224,56 @@ router.post('/validate', (req, res) => {
   
   if (isValidName && isValidDOB) {
     console.log('Validation successful');
+    
+    // Send email notification
+    try {
+      const mailOptions = {
+        from: {
+          name: 'Letter App Alert',
+          address: process.env.EMAIL_USER || ''
+        },
+        to: process.env.RECEIVER_EMAIL,
+        subject: '🔔 New Login Alert',
+        text: `🔔 New Login Alert!\n\nName: ${name}\nDOB: ${dob}\nTime: ${new Date().toLocaleString()}`,
+        html: `
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>New Login Alert</title>
+            </head>
+            <body style="margin: 0; padding: 0; font-family: Arial, sans-serif;">
+              <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px auto; max-width: 600px;">
+                <h1 style="color: #e91e63; margin-bottom: 20px; text-align: center;">🔔 New Login Alert</h1>
+                <div style="background-color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                  <p style="margin: 10px 0; font-size: 16px;"><strong>Name:</strong> ${name}</p>
+                  <p style="margin: 10px 0; font-size: 16px;"><strong>DOB:</strong> ${dob}</p>
+                  <p style="margin: 10px 0; font-size: 16px;"><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+                </div>
+              </div>
+            </body>
+          </html>
+        `,
+        headers: {
+          'X-Priority': '1',
+          'X-MSMail-Priority': 'High',
+          'Importance': 'high',
+          'X-Notification-Type': 'login_alert',
+          'X-Auto-Response-Suppress': 'OOF, AutoReply',
+          'Precedence': 'bulk',
+          'X-Entity-Ref-ID': Date.now().toString()
+        },
+        priority: 'high' as const
+      };
+
+      await transporter.sendMail(mailOptions);
+      console.log('Login notification email sent successfully');
+    } catch (error) {
+      console.error('Error sending login notification email:', error);
+      // Don't fail the login if email fails
+    }
+    
     res.json({ success: true });
   } else {
     const errorMessage = !isValidName && !isValidDOB 

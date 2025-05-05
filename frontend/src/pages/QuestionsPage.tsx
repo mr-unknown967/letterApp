@@ -7,7 +7,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { Heart, ExternalLink, MessageCircle } from "lucide-react";
+import { Heart, } from "lucide-react";
+import { FaSnapchatGhost } from "react-icons/fa";
+import { ExternalLink } from "lucide-react"; // Keep this if you're still using Lucide for the link icon
+
 
 const QuestionsPage = () => {
   const [, navigate] = useLocation();
@@ -252,13 +255,13 @@ const QuestionsPage = () => {
             <h2 className={`font-dancing text-3xl sm:text-4xl font-bold text-pink-700 mb-2 transition-all duration-1000 delay-[200ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>Let's Connect</h2>
-            <p className={`text-gray-600 text-sm sm:text-base transition-all duration-1000 delay-[400ms] ${
+            {/* <p className={`text-gray-600 text-sm sm:text-base transition-all duration-1000 delay-[400ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>I'd love to get to know you better</p>
+            }`}>I'd love to get to know you better</p> */}
             <p className={`text-primary-600 font-medium mt-3 md:mt-4 text-sm sm:text-base transition-all duration-1000 delay-[600ms] ${
               isAnimated ? 'opacity-80 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>
-              Whatever your answers may be, I just request you to please respond to these questions.
+              Agar aapko kuch bolna ya puchna hai to niche likh do, <br /> Ya phir link bhi hai.
             </p>
           </div>
 
@@ -267,8 +270,7 @@ const QuestionsPage = () => {
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>
               <Label htmlFor="additionalInfo" className="block mb-2 text-sm sm:text-base font-medium text-gray-800">
-              Dil mein lafzoon ka ek samundar hai... jo ek khat me baya karna muskil hai.. <br />
-aap se ek guzarish hai...  agar aap ku aitraaz nai hai to kya hum milke baat karsakte hai kya (college me hi), please let me know here?
+              
               </Label>
               <Textarea
                 id="additionalInfo"
@@ -283,14 +285,13 @@ aap se ek guzarish hai...  agar aap ku aitraaz nai hai to kya hum milke baat kar
                 isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
               }`}>
                 <p className="text-xs sm:text-sm text-gray-600">
-                  I would be really happy if we could connect on Snapchat:
                   <a
                     href="https://www.snapchat.com/add/md.moiz2907?share_id=BaoCvzg1bnY&locale=en-IN"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 mt-2 text-primary-600 hover:text-primary-700 font-medium transition-colors"
                   >
-                    <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                    <FaSnapchatGhost className="h-4 w-4 sm:h-5 sm:w-5" />
                     <span>@md.moiz2907</span>
                     <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4" />
                   </a>

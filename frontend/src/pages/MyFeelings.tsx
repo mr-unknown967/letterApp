@@ -151,63 +151,86 @@ const MyFeelings = () => {
           <Heart className="h-16 w-16 text-primary-200" fill="currentColor" />
         </div>
         
-        <CardContent className="p-4 sm:p-6 md:p-8 relative card-content-wrapper">
-          <div className="text-center mb-6 md:mb-8 animate-fade-in">
+        <CardContent className="p-4 sm:p-5 md:p-6 relative card-content-wrapper">
+          <div className="text-center mb-4 md:mb-5 animate-fade-in">
             <h2 className="font-dancing text-4xl sm:text-6xl font-semibold text-pink-700 mb-2">My Feelings</h2>
           </div>
           
-          <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none space-y-3 min-h-[220px]">
+          <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none space-y-2 min-h-[220px]">
             <p className={`text-gray-800 font-medium font-semibold mb-2 md:mb-3 transition-all duration-1000 ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>Dear Zubiyah,</p>
 
-            <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[200ms] ${
+            {/* <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[200ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>I keep thinking about you... How are you these days? hope you're truly happy.
+            </p> */}
+
+            {/* <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[400ms] ${
+              isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
+            }`}>I've wanted to tell you something for a very long time, but never found the right moment. I tried to talk to you, but you didn't listen to me.</p> */}
+
+            <p className={`text-primary-700  italic mb-2 md:mb-3 transition-all duration-1000 delay-[600ms] ${
+              isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
+            }`}>Aap me kuch to aisi baat hai... jis ke liye mai aapka deewana ho gaya.</p>
+
+            <p className={`mb-2 md:mb-3  transition-all duration-1000 delay-[800ms] ${
+              isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
+            }`}>Pehli nazar mein hi meku aap se mohabbat ho gayi.
             </p>
 
-            <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[400ms] ${
+            <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[1200ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>I've wanted to tell you something for a very long time, but never found the right moment. I tried to talk to you, but you didn't listen to me.</p>
+            }`}>Aap ki muskurahat, aap ki aawaz, aap ka lehja,
+                aur vo nazakat – mai fidaa hogaya aap pe.
+            </p>
 
-            <p className={`text-primary-700 font-medium italic mb-2 md:mb-3 transition-all duration-1000 delay-[600ms] ${
+             <p className={`mb-2 md:mb-3  transition-all duration-1000 delay-[1400ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Aap me kuch to baat hai... jis ke liye mai aap deewana ho gaya.</p>
+            }`}>Aur Phir 13th October ka fest ke din dusri baar dekhata, that day I talk to you for the first time.... (I think maybe you don't remember)</p>
 
-            <p className={`mb-2 md:mb-3 font-semibold transition-all duration-1000 delay-[800ms] ${
+            <p className={`mb-2 md:mb-3  transition-all duration-1000 delay-[1000ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Aap ki muskurahat, aap ki aawaz, aap ka lehja, aur jis tarah aap apne aap ko itni nazakat se pesh karte ho – mai fidaa hogaya aap pe.</p>
+            }`}> Us din(ECSTASY) mai aapko ek baat bola tha na ki... "aapko paheli baar dekhte hi mohabbat hogai",
+                then you said ki "ye zamane me kisko hoti aisa". <br />
+                Mai bhi aise hi sochta tha but, aapko dekhne ke baad ye sonch bada gayi. <br />
+            </p> <br />
 
-            <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[1000ms] ${
-              isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Jab bhi aap ko dekhta hoon, meri puri duniya tham jaati hai… bas aap hi nazar aati hai .</p>
+            
 
-            <p className={`mb-2 md:mb-3 font-semibold transition-all duration-1000 delay-[1200ms] ${
+            <p className={`mb-2 md:mb-3  transition-all duration-1000 delay-[1400ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Pehli nazar mein hi app se mohabbat ho gayi.<br className="hidden sm:block"/>
-            Aaj bhi yaad hai vo din, jab mai app ko pehli baat   – aap apne friends ke saath campus mein ghum rahe the, black dress aur hijab mein – bass jab se aap mere ruh par kabza karliya.</p>
+            }`}> Aapki ek jhalak ke liye tarasta hoon.., Aap se baat karne ke liye tarasta hoon.. <br />
+                Aur phir jab bhi aapko dekhta hoon, meri puri duniya tham jaati hai,
+                bas aap hi nazar aati hoo. <br />
+                
+            </p>
 
-            <p className={`mb-2 md:mb-3 font-semibold transition-all duration-1000 delay-[1400ms] ${
-              isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>aur Phir 13th October ka fest ke din dusri baar dekhata, that day i talk to you for the first time.... (I doubt you remembered that day)</p>
+            
+            
 
-            <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[1600ms] ${
+            {/* <p className={`mb-2 md:mb-3  transition-all duration-1000 delay-[1400ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Kal(ANNUAL DAY) aap ko dekh ke ek shayri yaad aayi...<br className="hidden sm:block"/></p>
+            }`}>aur Phir 13th October ka fest ke din dusri baar dekhata, that day i talk to you for the first time.... (I doubt you remembered that day)</p> */}
+
+            <p className={`mb-2 md:mb-3  font-semibold transition-all duration-1000 delay-[1600ms] ${
+              isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
+            }`}>aap ko dekh ke ek shayri yaad aati hai... (Specially for your eyes)<br className="hidden sm:block"/></p> 
+            {/* Kal(ANNUAL DAY) */}
 
             <p className={`mb-2 md:mb-3 font-semibold transition-all duration-1000 delay-[1800ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>Arz kiya hai..</p>
 
-            <p className={`mb-2 md:mb-3 font-semibold transition-all duration-1000 delay-[2000ms] ${
+            <p className={`mb-2 md:mb-3 font-semibold leading-normal transition-all duration-1000 delay-[2000ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>
               "Ye sitare tumhari ankho ke, ye chand thumri zameen par,<br className="hidden sm:block"/>
               Ye sitare tumhari ankho ke, ye chand tumhari zameen par,<br className="hidden sm:block"/><br className="hidden sm:block"/>
               
-              lagta hai utra ho tum, kisi asman se humri zameen par,<br className="hidden sm:block"/><br className="hidden sm:block"/>
+              lagta hai utre ho tum, kisi asman se humri zameen par,<br className="hidden sm:block"/><br className="hidden sm:block"/>
               
-              parashan hai gul, gulbadan bhi khak hua,<br className="hidden sm:block"/>
+              parashan hai gul, gulbadan bhi khak hue,<br className="hidden sm:block"/>
               shahar me Marz-e-Majnu faila,<br className="hidden sm:block"/>
               sab giraban jhak hua,<br className="hidden sm:block"/><br className="hidden sm:block"/>
               
@@ -215,38 +238,45 @@ const MyFeelings = () => {
               bezuban the jitna sab bebak hua,<br className="hidden sm:block"/><br className="hidden sm:block"/>
               
               valla parstish hogi thumri, valla parstish hogi thumri,<br className="hidden sm:block"/>
-              tum agar thahar jaaoge milane kahin  par❤"
+              tum agar thahar jao yahi kahin  par❤"
             </p>
 
-            <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[2200ms] ${
+            {/* <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[2200ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>Annual day ke din aap se baat karne ki kooshish kara, magar dar lagra tha isliye nai karsaka,<br className="hidden sm:block"/>
-            Lekin 'ECSTASY' ke din, himmat karke aapse baat kar, magar jo bolna tha vo nai bol saka kyu ki time ich nai tha...</p>
+            Lekin 'ECSTASY' ke din, himmat karke aapse baat kar, magar jo bolna tha vo nai bol saka kyu ki time ich nai tha...</p> */}
 
             <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[2400ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>Bas meku aapse ye bolna hai ki…</p>
 
-            <p className={`text-primary-700 font-medium mb-2 md:mb-3 transition-all duration-1000 delay-[2600ms] ${
+            {/* <p className={`text-primary-700 font-medium mb-2 md:mb-3 transition-all duration-1000 delay-[2600ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>meku app se bepanah mohabbat hai.<br className="hidden sm:block"/>
             Socha tha – aap se door rehe to aap ko bhool jaton…(isliye sometimes aapko ignore kara)<br className="hidden sm:block"/>
-            Lekin bhoolna to chhodo, mohabbat aur bhi gehri hoti gayi.</p>
+            Lekin bhoolna to chhodo, mohabbat aur bhi gehri hoti gayi.</p> */}
 
             <p className={`mb-2 md:mb-3 font-semibold transition-all duration-1000 delay-[2800ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Mai aapko khud se zyada chahane laga hoon.<br className="hidden sm:block"/>
-            aapko palkon pe rakhunga.<br className="hidden sm:block"/>
-            aap ki har khwahish ko apna farz bana ke poora karunga.</p>
+            }`}>meku aap se bepanah mohabbat hai..<br className="hidden sm:block"/>
+                magar ye to zaruri nai hai ki aapko bhi mere se mohabbat ho. hai  na? <br />
+
+                
+            {/* aapko palkon pe rakhunga.<br className="hidden sm:block"/>aap ki har khwahish ko apna farz bana ke poora karunga. */}
+            </p>
 
             <p className={`mb-2 md:mb-3 font-semibold transition-all duration-1000 delay-[3000ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Bas dil se dua hai... ki kabhi na kabhi to aapko samaj me aye ki mai aapse kitni mohabbat karton.</p>
+            }`}>Bas dil se dua hai ki... kabhi na kabhi to aapko samaj me aye ki mai aapse kitni mohabbat karton.</p>
 
 
             <p className={`mt-4 text-gray-700 text-sm sm:text-base italic transition-all duration-1000 delay-[3200ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>P.S. If anything in this letter has caused you any discomfort or hurt your feelings, I sincerely apologize. That was never my intention.</p>
+            }`}>Hoti rahegi mulakatein tumse, nigahon se dur ho dil se nai</p>
+
+            <p className={`mt-4 text-gray-700 text-sm sm:text-base italic transition-all duration-1000 delay-[3200ms] ${
+              isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
+            }`}>P.S. If anything in this letter has caused you any discomfort or hurt your feelings, I sincerely apologize. That was never my intention, and it never will be</p>
           </div>
           
           <div className={`mt-6 md:mt-8 flex justify-center transition-all duration-1000 delay-[3600ms] ${
