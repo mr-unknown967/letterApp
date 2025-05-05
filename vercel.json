@@ -1,33 +1,17 @@
 {
-  "version": 2,
-  "builds": [
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "cd frontend && npm install",
+  "framework": "vite",
+  "rewrites": [
     {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "npm run build",
-        "outputDirectory": "frontend/dist",
-        "installCommand": "npm install --legacy-peer-deps"
-      }
-    },
-    {
-      "src": "backend/src/index.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": [
-          "backend/src/**",
-          "shared/**"
-        ]
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "frontend/dist/$1"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "VITE_API_URL": "https://letterapp-backend.onrender.com",
+    "VITE_VALID_USERNAMES": "[\"zubiya\",\"zubiyah\",\"zubiya kounain\",\"zubiyah kounain\"]",
+    "VITE_USER_DOB": "2005-07-29"
   }
 } 
