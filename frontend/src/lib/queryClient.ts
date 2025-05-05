@@ -1,6 +1,10 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
-const API_BASE_URL = 'http://localhost:3000';
+if (!import.meta.env.VITE_API_URL) {
+  throw new Error('VITE_API_URL environment variable is not set');
+}
+
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -27,7 +31,8 @@ export async function apiRequest(
   const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
-    body: data ? JSON.stringify(data) : undefined
+    body: data ? JSON.stringify(data) : undefined,
+    credentials: 'include'
   });
 
   await throwIfResNotOk(res);
