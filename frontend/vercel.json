@@ -8,5 +8,10 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "VITE_API_URL": "https://letterapp-backend.onrender.com",
+    "VITE_VALID_USERNAMES": "[\"zubiya\",\"zubiyah\",\"zubiya kounain\",\"zubiyah kounain\"]",
+    "VITE_USER_DOB": "2005-07-29"
+  }
 } 
