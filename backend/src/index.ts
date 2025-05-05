@@ -28,6 +28,7 @@ const port = process.env.PORT || 3000;
 // CORS configuration
 app.use(cors({
   origin: [
+    'https://letter-app-frontend-nine.vercel.app',
     'https://letterapp-frontend.vercel.app',
     'http://localhost:5173',
     'http://127.0.0.1:5173'
