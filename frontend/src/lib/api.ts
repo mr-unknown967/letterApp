@@ -1,7 +1,11 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
+if (!import.meta.env.VITE_API_URL) {
+  throw new Error('VITE_API_URL environment variable is not set');
+}
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://letterapp-backend.onrender.com',
+  baseURL: import.meta.env.VITE_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },

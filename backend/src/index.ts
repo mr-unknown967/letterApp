@@ -12,7 +12,8 @@ const requiredEnvVars = [
   'RECEIVER_EMAIL',
   'SESSION_SECRET',
   'VALID_USERNAMES',
-  'USER_DOB'
+  'USER_DOB',
+  'ALLOWED_ORIGINS'
 ];
 
 for (const envVar of requiredEnvVars) {
@@ -25,14 +26,12 @@ for (const envVar of requiredEnvVars) {
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Parse allowed origins from environment variable
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
+
 // CORS configuration
 app.use(cors({
-  origin: [
-    'https://letter-app-frontend-nine.vercel.app',
-    'https://letterapp-frontend.vercel.app',
-    'http://localhost:5173',
-    'http://127.0.0.1:5173'
-  ],
+  origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -63,11 +62,7 @@ app.use('/api', routes);
 // Connect to MongoDB and start server
 connectDB().then(() => {
   app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-    console.log('Environment variables loaded:', {
-      validNames: process.env.VALID_USERNAMES,
-      userDOB: process.env.USER_DOB
-    });
+    console.log('Server running on port:', port);
   });
 }).catch(err => {
   console.error('Failed to connect to MongoDB:', err);
