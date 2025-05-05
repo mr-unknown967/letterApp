@@ -26,23 +26,15 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // CORS configuration
-const allowedOrigins = [
-  'http://localhost:5173', // Development
-  'https://your-vercel-app.vercel.app', // Production - replace with your Vercel URL
-  'https://letter-app-backend.onrender.com' // Render URL
-];
-
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
+  origin: [
+    'https://letterapp-frontend.vercel.app',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
 
 // Body parser middleware
