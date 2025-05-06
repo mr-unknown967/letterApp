@@ -178,7 +178,7 @@ const MyFeelings = () => {
             <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[800ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>Aur phir dusri dafa 13th October ka fest(Navratri Naveli) ke din, usdin paheli baar aap se baat-chit hui thi (shayad aapko yaad nahi hai).
-            usdin aap bahut khubsurat dikhre the...(time nahi mila ye compliment dene ke liye, coz you were in a hurry)</p>
+            usdin aap bahut khubsurat dikhre the...(usdin time nahi mila ye compliment dene ke liye, coz you were in a hurry)</p>
 
             <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[1000ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
@@ -199,7 +199,7 @@ const MyFeelings = () => {
 
             <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[1600ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Aap ko dekh ke ek shayri yaad aati hai... (espically for your beautiful brown eyes)</p>
+            }`}>Aap ko dekh ke ek shayri yaad aati hai...</p>
 
             <p className={`mb-2 md:mb-3 transition-all duration-1000 delay-[1800ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
