@@ -28,14 +28,14 @@ const MessagePage = () => {
       setVisibleParagraphs(count);
       
       if (count < paragraphs.length) {
-        timerRef.current = setTimeout(revealNextParagraph, 400);
+        timerRef.current = setTimeout(revealNextParagraph, 200);
       } else {
-        setTimeout(() => setShowButton(true), 400);
+        setTimeout(() => setShowButton(true), 200);
       }
     };
     
     // Start the sequence after a short delay
-    timerRef.current = setTimeout(revealNextParagraph, 400);
+    timerRef.current = setTimeout(revealNextParagraph, 200);
     
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -60,7 +60,7 @@ const MessagePage = () => {
     "Ye sab karne ka mera intension nai tha,",
     "I just wanted to confess my feelings.",
     "Aap jaha bhi raho khush raho, bas yehi dua hai,",
-    <span className="font-semibold">Just a humble request—if your heart allows, please read the letter I have written for you. I’ve shared my feelings and my thoughts, and it would truly mean a lot if you could give it a moment of your time</span>,
+    <span className="font-semibold">Just a humble request—if your heart allows, please read the letter I have written for you. I've shared my feelings and my thoughts, and it would truly mean a lot if you could give it a moment of your time</span>,
     "From someone who never stopped admiring you — even from afar."
   ];
   
