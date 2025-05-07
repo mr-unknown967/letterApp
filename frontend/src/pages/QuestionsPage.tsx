@@ -261,10 +261,11 @@ const QuestionsPage = () => {
             <p className={`text-primary-600 font-medium mt-3 md:mt-4 text-sm sm:text-base transition-all duration-1000 delay-[600ms] ${
               isAnimated ? 'opacity-80 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>
-              Agar aapko kuch bolna ya puchna hai to niche likh do, <br /> Ya phir link bhi hai.
+              Agar aapko kuch bhi bolna ya puchna hai bejhi-jak niche likh do. <br />
             </p>
           </div>
 
+            
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div className={`input-container transition-all duration-1000 delay-[800ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
@@ -281,6 +282,12 @@ const QuestionsPage = () => {
                 placeholder="Feel free to share your thoughts or questions here..."
                 rows={3}
               />
+
+              <p className={`mt-4  text-sm sm:text-base italic transition-all duration-1000 ${isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'}`}>
+                Kabhi bhi aapko zarurat ho to, just reach out to me here— main aapki madad ke liye hamesha tayar hoon.
+              </p>
+
+
               <div className={`mt-3 p-2 sm:p-3 bg-gray-50 rounded-lg border border-gray-100 transition-all duration-1000 delay-[1000ms] ${
                 isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
               }`}>
