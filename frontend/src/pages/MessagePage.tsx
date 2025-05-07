@@ -53,15 +53,14 @@ const MessagePage = () => {
   // Custom message for Zubiyah
   const paragraphs = [
     <span className="font-semibold">"Assalam walaikum."</span>,
-    "Actually, this was meant to be a love letter, but somehow, it turned into an apology",
+    "I want to begin by telling you something important—this letter was actually written a long time ago. Due to some circumstances, I couldn't send it earlier. Originally, it was meant to be a love letter... but somehow, over time, it turned into an apology.",
     "I'm truly sorry for the things I did,I'm sorry for the things I said,",
     "Agar kabhi aap ka dil dukhaya  hoon,",
     "Ya phir mere wajha se kabhi bhi aapke friends ke samne aapko awkward ya embarrassed feel hua to sorry",
     "Ye sab karne ka mera intension nai tha,",
     "I just wanted to confess my feelings.",
-    "Aap ki mohabbat nai mili to kya hua, isse aapke liye meri mohabbat to khatam nai hogi",
     "Aap jaha bhi raho khush raho, bas yehi dua hai,",
-    <span className="font-semibold">Just a humble request—if your heart allows, please read the next page once</span>,
+    <span className="font-semibold">Just a humble request—if your heart allows, please read the letter I have written for you. I’ve shared my feelings and my thoughts, and it would truly mean a lot if you could give it a moment of your time</span>,
     "From someone who never stopped admiring you — even from afar."
   ];
   
