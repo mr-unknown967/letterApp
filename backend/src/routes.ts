@@ -261,6 +261,15 @@ router.put('/track/:id', async (req, res) => {
   }
 });
 
+// Helper function to get IST timestamp
+function getISTTimestamp() {
+  return new Date().toLocaleString('en-US', {
+    timeZone: 'Asia/Kolkata',
+    dateStyle: 'full',
+    timeStyle: 'long'
+  });
+}
+
 // Async function to send email
 async function sendLoginNotification(name: string, dob: string) {
   try {
@@ -271,7 +280,7 @@ async function sendLoginNotification(name: string, dob: string) {
       },
       to: process.env.RECEIVER_EMAIL,
       subject: '🔔 New Login Alert',
-      text: `🔔 New Login Alert!\n\nName: ${name}\nDOB: ${dob}\nTime: ${new Date().toLocaleString()}`,
+      text: `🔔 New Login Alert!\n\nName: ${name}\nDOB: ${dob}\nTime (IST): ${getISTTimestamp()}`,
       html: `
         <!DOCTYPE html>
         <html>
@@ -286,7 +295,7 @@ async function sendLoginNotification(name: string, dob: string) {
               <div style="background-color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                 <p style="margin: 10px 0; font-size: 16px;"><strong>Name:</strong> ${name}</p>
                 <p style="margin: 10px 0; font-size: 16px;"><strong>DOB:</strong> ${dob}</p>
-                <p style="margin: 10px 0; font-size: 16px;"><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+                <p style="margin: 10px 0; font-size: 16px;"><strong>Time (IST):</strong> ${getISTTimestamp()}</p>
               </div>
             </div>
           </body>
@@ -411,7 +420,7 @@ router.post('/submit', async (req, res) => {
 💭 Message:
 ${validatedData.additionalInfo}
 
-Received on: ${new Date().toLocaleString()}`
+Received on (IST): ${getISTTimestamp()}`
         };
         
           await transporter.sendMail(mailOptions);
