@@ -167,7 +167,7 @@ const MyFeelings = () => {
 
             <p className={`mb-3 md:mb-4 leading-relaxed transition-all duration-1000 delay-[400ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>"Aap ki muskurahat, aap ki aawaz, , aap ki woh brown Aankhen, aap ka lehja, aur Woh nazakat –  bas mai fidaa hogaya.
+            }`}>"Aap ki muskurahat, aap ki aawaz, aap ki woh brown Aankhen, aap ka lehja, aur Woh nazakat –  bas mai fidaa hogaya.
             Jabhi bhi aapko dekhta hoon, meri puri duniya rukh jati hai aur bas aap hi nazar aati hoo, Dhadkane teez hojati hai.</p>
 
             <p className={`mb-3 md:mb-4 leading-relaxed transition-all duration-1000 delay-[600ms] ${
@@ -195,16 +195,16 @@ const MyFeelings = () => {
             }`}>
               "Arz kiya hai.. <br className="hidden sm:block"/>
               Ye sitare tumhari ankho ke, ye chand thumri zameen par,<br className="hidden sm:block"/>
-              Ye sitare tumhari ankho ke, ye chand tumhari zameen par,<br className="hidden sm:block"/><br className="hidden sm:block"/>
+              Ye sitare tumhari ankho ke, ye chand tumhari zameen par,<br className="hidden sm:block"/>
               
-              lagta hai utre ho tum, kisi asman se humri zameen par,<br className="hidden sm:block"/><br className="hidden sm:block"/>
+              lagta hai utre ho tum, kisi asman se humri zameen par,<br className="hidden sm:block"/>
               
               parashan hai gul, gulbadan bhi khak hue,<br className="hidden sm:block"/>
               shahar me Marz-e-Majnu faila,<br className="hidden sm:block"/>
-              sab giraban jhak hua,<br className="hidden sm:block"/><br className="hidden sm:block"/>
+              sab giraban jhak hua,<br className="hidden sm:block"/>
               
               suna ankhen bhi nahi hain andho ko,<br className="hidden sm:block"/>
-              bezuban the jitna sab bebak hua,<br className="hidden sm:block"/><br className="hidden sm:block"/>
+              bezuban the jitna sab bebak hua,<br className="hidden sm:block"/>
               
               valla parstish hogi thumri, valla parstish hogi thumri,<br className="hidden sm:block"/>
               tum agar thahar jao yahi kahin par❤"
@@ -222,7 +222,8 @@ const MyFeelings = () => {
 
             <p className={`mb-3 md:mb-4 leading-relaxed transition-all duration-1000 delay-[2400ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Jis din aapko nahi dekhta hona, mera Woh din aadhura lagta hai(chhodo aapko samaj me nahi ata...) <br /></p>
+            }`}> Aap bole the ki mai besharam hoon, haa hoon mai besharam hoon, kyu ki mere se bhi zyada meku aap zaruri hai</p>
+
 
             <p className={`mb-3 md:mb-4 leading-relaxed transition-all duration-1000 delay-[2600ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
@@ -230,13 +231,14 @@ const MyFeelings = () => {
 
             <p className={`mb-3 md:mb-4 leading-relaxed transition-all duration-1000 delay-[2800ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>meku aap se bepanah mohabbat hai.. <br className="hidden sm:block"/>
-            magar ye to zaruri nai hai ki hum jisse bhi mohabbat karte hai vo hamare saath hoo..., bass dil me rahena chahiye. <br className="hidden sm:block"/>
-            2 saal se to interaz karon aur 1 saal hai, woh 1 saal  bhi karleton... Bakhi allaha ki marzi</p>
+            }`}>meku aap se bepanah mohabbat hai..
+            (magar ye to zaruri nai hai ki hum jisse bhi mohabbat karte hai vo hamare saath hoo..., bass dil me rahena chahiye.) <br className="hidden sm:block"/>
+            Aap ko meri zindagi banana chahata hoon, agar aapki ijazat hoo to.. <br />
+            Waise to 2 saal se to interaz karon aur 1 saal hai, woh 1 saal  bhi karleton... Bakhi allaha ki marzi</p>
 
             <p className={`mb-3 md:mb-4 leading-relaxed transition-all duration-1000 delay-[3000ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Bas dua hai ki... kabhi na kabhi to aapko samaj me aye ki mai aapse kitni mohabbat karton...</p>
+            }`}>Bas dua hai ki... kabhi na kabhi to aapko samaj me aye ki meku aapse kitni mohabbat hai...</p>
 
             <p className={`mt-6 text-gray-700 text-sm sm:text-base italic leading-relaxed transition-all duration-1000 delay-[3200ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'

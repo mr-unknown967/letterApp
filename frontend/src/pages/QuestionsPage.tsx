@@ -284,7 +284,7 @@ const QuestionsPage = () => {
               />
 
               <p className={`mt-4  text-sm sm:text-base italic transition-all duration-1000 ${isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'}`}>
-                Kabhi bhi aapko zarurat ho to, just reach out to me here— main aapki madad ke liye hamesha tayar hoon.
+                Kabhi bhi aapko zarurat ho to, just reach out to me here— I'm always there for you.
               </p>
 
 
