@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Heart, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import debounce from 'lodash/debounce';
 
 const LandingPage = () => {
   const [, navigate] = useLocation();
@@ -14,6 +15,7 @@ const LandingPage = () => {
   const [error, setError] = useState("");
   const [isAnimated, setIsAnimated] = useState(false);
   const [showHearts, setShowHearts] = useState(false);
+  const [isValidating, setIsValidating] = useState(false);
 
   useEffect(() => {
     // Start the animations after a small delay
@@ -24,51 +26,57 @@ const LandingPage = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Debounced validation function
+  const debouncedValidation = useCallback(
+    debounce(async (name: string, dob: string) => {
+      if (!name || !dob) return;
+      
+      setIsValidating(true);
+      try {
+        const response = await apiRequest('POST', '/api/validate', { name, dob });
+        const data = await response.json();
+        
+        if (data.success) {
+          sessionStorage.setItem('userName', name);
+          toast({
+            title: "Validation successful! ✨",
+            description: "Preparing your special message...",
+            duration: 2000,
+          });
+          setShowHearts(true);
+          setTimeout(() => {
+            navigate('/message');
+          }, 1800);
+        } else {
+          setError(data.message || 'Please check your information and try again.');
+          toast({
+            variant: "destructive",
+            title: "Validation failed",
+            description: data.message || 'Please check your information and try again.',
+          });
+        }
+      } catch (error) {
+        console.error('Validation error:', error);
+        setError('Something went wrong. Please try again.');
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Something went wrong. Please try again.",
+        });
+      } finally {
+        setIsValidating(false);
+      }
+    }, 500),
+    [toast, navigate]
+  );
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setIsLoading(true);
 
     try {
-      // Send the date in YYYY-MM-DD format directly
-      const response = await apiRequest('POST', '/api/validate', {
-        name,
-        dob,
-      });
-      
-      const data = await response.json();
-      
-      if (data.success) {
-        sessionStorage.setItem('userName', name);
-        
-        toast({
-          title: "Validation successful! ✨",
-          description: "Preparing your special message...",
-          duration: 2000,
-        });
-        
-        setShowHearts(true);
-        
-        setTimeout(() => {
-          navigate('/message');
-        }, 1800);
-      } else {
-        const errorMessage = data.message || 'Please check your information and try again.';
-        setError(errorMessage);
-        toast({
-          variant: "destructive",
-          title: "Validation failed",
-          description: errorMessage,
-        });
-      }
-    } catch (error) {
-      console.error('Validation error:', error);
-      setError('Something went wrong. Please try again.');
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong. Please try again.",
-      });
+      await debouncedValidation(name, dob);
     } finally {
       setIsLoading(false);
     }
@@ -139,8 +147,8 @@ const LandingPage = () => {
           <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
             A special message
           </span>
-        </h1>
-        <p className="text-gray-600 text-center mb-8 animate-shimmer">is waiting for you</p>
+        </h1> <br />
+        {/* <p className="text-gray-600 text-center mb-8 animate-shimmer">is waiting for you</p> */}
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div 
@@ -154,10 +162,14 @@ const LandingPage = () => {
               type="text"
               id="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+                setError("");
+              }}
               className="form-input"
               placeholder="HINT: z... k..."
               required
+              disabled={isValidating}
             />
             <label htmlFor="name" className="floating-label">Your Name</label>
           </div>
@@ -173,10 +185,14 @@ const LandingPage = () => {
               type="date"
               id="dob"
               value={dob}
-              onChange={(e) => setDob(e.target.value)}
+              onChange={(e) => {
+                setDob(e.target.value);
+                setError("");
+              }}
               className="form-input"
               placeholder=" "
               required
+              disabled={isValidating}
             />
             <label htmlFor="dob" className="floating-label">Date of Birth</label>
           </div>
@@ -187,7 +203,7 @@ const LandingPage = () => {
           
           <button 
             type="submit" 
-            disabled={isLoading}
+            disabled={isLoading || isValidating}
             className={`w-full text-white font-medium py-3 px-4 rounded-lg bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 
               transition-all duration-700 transform shadow-lg hover:shadow-xl 
               ${isAnimated 
@@ -195,9 +211,10 @@ const LandingPage = () => {
                 : 'opacity-0 translate-y-8 scale-95'
               }
               hover:scale-[1.02] active:scale-[0.98] hover:shadow-pink-500/25
+              disabled:opacity-50 disabled:cursor-not-allowed
             `}
           >
-            {isLoading ? (
+            {isLoading || isValidating ? (
               <span className="flex items-center justify-center space-x-2">
                 <div className="loading-spinner" />
                 <span>Verifying...</span>
@@ -212,7 +229,7 @@ const LandingPage = () => {
         </form>
         
         <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500 animate-pulse">✨ Something special awaits you ✨</p>
+          <p className="text-sm text-gray-500 animate-pulse">✨ Something awaits you ✨</p>
         </div>
       </div>
     </div>

@@ -8,17 +8,34 @@ import { join } from 'path';
 const router = express.Router();
 const TRACKING_FILE = join(process.cwd(), 'data', 'tracking.json');
 
-// Simple in-memory cache with TTL
-class SimpleCache {
+// Parse environment variables once at startup
+const validNames = JSON.parse(process.env.VALID_USERNAMES || '[]').map((name: string) => name.toLowerCase().trim());
+const expectedDOB = process.env.USER_DOB || '';
+
+if (!expectedDOB) {
+  console.error('USER_DOB environment variable is not set');
+  process.exit(1);
+}
+
+// Enhanced cache with better memory management
+class EnhancedCache {
   private cache: Map<string, { value: any; expiry: number }>;
   private ttl: number;
+  private maxSize: number;
 
-  constructor(ttlSeconds: number) {
+  constructor(ttlSeconds: number, maxSize: number) {
     this.cache = new Map();
     this.ttl = ttlSeconds * 1000;
+    this.maxSize = maxSize;
   }
 
   set(key: string, value: any): void {
+    // If cache is full, remove oldest entries
+    if (this.cache.size >= this.maxSize) {
+      const oldestKey = this.cache.keys().next().value;
+      this.cache.delete(oldestKey);
+    }
+
     this.cache.set(key, {
       value,
       expiry: Date.now() + this.ttl
@@ -41,6 +58,9 @@ class SimpleCache {
     this.cache.clear();
   }
 }
+
+// Initialize enhanced cache with 5 minutes TTL and max 1000 entries
+const validationCache = new EnhancedCache(300, 1000);
 
 // Simple rate limiter
 class RateLimiter {
@@ -76,9 +96,6 @@ class RateLimiter {
     return false;
   }
 }
-
-// Initialize cache with 5 minutes TTL
-const validationCache = new SimpleCache(300);
 
 // Initialize rate limiter (5 requests per 15 minutes)
 const validationLimiter = new RateLimiter(15 * 60 * 1000, 5);
@@ -337,32 +354,9 @@ router.post('/validate', rateLimitMiddleware, async (req, res) => {
   
     // Clean and normalize the submitted name
     const cleanedName = name.toLowerCase().trim().replace(/\s+/g, ' ');
-      
-    // Get valid names from environment variable
-    let validNames: string[] = [];
-    try {
-      validNames = JSON.parse(process.env.VALID_USERNAMES || '[]');
-    } catch (error) {
-      console.error('Error parsing VALID_USERNAMES:', error);
-      return res.status(500).json({ 
-        success: false, 
-        message: 'Server configuration error' 
-      });
-    }
     
     // Check if the name matches any valid variation
-    const isValidName = validNames.some((validName: string) => cleanedName === validName.toLowerCase().trim());
-    
-    // Get expected DOB from environment variable
-    const expectedDOB = process.env.USER_DOB;
-    if (!expectedDOB) {
-      console.error('USER_DOB environment variable is not set');
-      return res.status(500).json({ 
-        success: false, 
-        message: 'Server configuration error' 
-      });
-    }
-    
+    const isValidName = validNames.includes(cleanedName);
     const isValidDOB = dob === expectedDOB;
     
     // Prepare response
@@ -382,7 +376,7 @@ router.post('/validate', rateLimitMiddleware, async (req, res) => {
     
     // Send email notification asynchronously if validation successful
     if (isValidName && isValidDOB) {
-      // Don't await the email sending
+      // Fire and forget email notification
       sendLoginNotification(name, dob).catch(error => {
         console.error('Error in email notification:', error);
       });
