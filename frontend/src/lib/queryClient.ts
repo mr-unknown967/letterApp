@@ -4,7 +4,7 @@ if (!import.meta.env.VITE_API_URL) {
   throw new Error('VITE_API_URL environment variable is not set');
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+const API_BASE_URL = import.meta.env.VITE_API_URL.trim();
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -18,8 +18,10 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  // Ensure URL starts with API base URL
-  const fullUrl = url.startsWith('http') ? url : `${API_BASE_URL}${url}`;
+  // Ensure URL starts with API base URL and remove any double slashes
+  const fullUrl = url.startsWith('http') 
+    ? url 
+    : `${API_BASE_URL.replace(/\/$/, '')}/${url.replace(/^\//, '')}`;
   
   // Debug log
   console.log('Making API request:', {
@@ -28,15 +30,20 @@ export async function apiRequest(
     data
   });
 
-  const res = await fetch(fullUrl, {
-    method,
-    headers: data ? { "Content-Type": "application/json" } : {},
-    body: data ? JSON.stringify(data) : undefined,
-    credentials: 'include'
-  });
+  try {
+    const res = await fetch(fullUrl, {
+      method,
+      headers: data ? { "Content-Type": "application/json" } : {},
+      body: data ? JSON.stringify(data) : undefined,
+      credentials: 'include'
+    });
 
-  await throwIfResNotOk(res);
-  return res;
+    await throwIfResNotOk(res);
+    return res;
+  } catch (error) {
+    console.error('API request failed:', error);
+    throw error;
+  }
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";
