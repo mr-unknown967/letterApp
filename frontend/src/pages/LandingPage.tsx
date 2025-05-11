@@ -26,13 +26,28 @@ const LandingPage = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Debounced validation function
+  // Debounced validation function with optimized timing
   const debouncedValidation = useCallback(
     debounce(async (name: string, dob: string) => {
       if (!name || !dob) return;
       
       setIsValidating(true);
       try {
+        // Quick client-side validation before API call
+        const normalizedName = name.toLowerCase().trim();
+        const validNames = JSON.parse(import.meta.env.VITE_VALID_USERNAMES || '[]');
+        const expectedDOB = import.meta.env.VITE_USER_DOB;
+        
+        if (!validNames.includes(normalizedName) || dob !== expectedDOB) {
+          setError('Please check your information and try again.');
+          toast({
+            variant: "destructive",
+            title: "Validation failed",
+            description: "Please check your information and try again.",
+          });
+          return;
+        }
+
         const response = await apiRequest('POST', '/api/validate', { name, dob });
         const data = await response.json();
         
@@ -66,7 +81,7 @@ const LandingPage = () => {
       } finally {
         setIsValidating(false);
       }
-    }, 500),
+    }, 300), // Reduced debounce time from 500ms to 300ms
     [toast, navigate]
   );
 
@@ -145,7 +160,7 @@ const LandingPage = () => {
         
         <h1 className="text-4xl font-bold text-center mb-2 mt-4">
           <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-            A special message
+            A message
           </span>
         </h1> <br />
         {/* <p className="text-gray-600 text-center mb-8 animate-shimmer">is waiting for you</p> */}

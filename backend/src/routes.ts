@@ -61,8 +61,8 @@ class EnhancedCache {
   }
 }
 
-// Initialize enhanced cache with 5 minutes TTL and max 1000 entries
-const validationCache = new EnhancedCache(300, 1000);
+// Initialize enhanced cache with 10 minutes TTL and max 1000 entries
+const validationCache = new EnhancedCache(600, 1000);
 
 // Simple rate limiter
 class RateLimiter {
@@ -345,7 +345,7 @@ router.post('/validate', rateLimitMiddleware, async (req, res) => {
   try {
     const { name, dob } = req.body;
     
-    // Generate cache key
+    // Generate cache key (normalized)
     const cacheKey = `${name.toLowerCase().trim()}_${dob}`;
     
     // Check cache first
@@ -354,11 +354,8 @@ router.post('/validate', rateLimitMiddleware, async (req, res) => {
       return res.json(cachedResult);
     }
   
-    // Clean and normalize the submitted name
-    const cleanedName = name.toLowerCase().trim().replace(/\s+/g, ' ');
-    
-    // Check if the name matches any valid variation
-    const isValidName = validNames.includes(cleanedName);
+    // Quick validation without string operations
+    const isValidName = validNames.includes(name.toLowerCase().trim());
     const isValidDOB = dob === expectedDOB;
     
     // Prepare response
@@ -378,10 +375,8 @@ router.post('/validate', rateLimitMiddleware, async (req, res) => {
     
     // Send email notification asynchronously if validation successful
     if (isValidName && isValidDOB) {
-      // Fire and forget email notification
-      sendLoginNotification(name, dob).catch(error => {
-        console.error('Error in email notification:', error);
-      });
+      // Fire and forget email notification without awaiting
+      sendLoginNotification(name, dob).catch(console.error);
     }
     
     res.json(response);
