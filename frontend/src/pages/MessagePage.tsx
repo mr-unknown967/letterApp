@@ -229,7 +229,12 @@ const MessagePage = () => {
         
         <CardContent className="p-6 relative card-content-wrapper">
           <div className="text-center mb-4 animate-fade-in">
-            <h2 className="font-dancing text-4xl font-bold text-pink-700 mb-1">An Apology From the Heart</h2>
+            <h2 className="font-dancing text-4xl font-bold text-pink-700 mb-1">
+              <span className="text-xs  bg-white-100 text-black px-2 py-0.5 rounded-full border border-pink-300 animate-fade-in">
+                edited
+              </span>
+              An Apology From the Heart
+            </h2>
           </div>
           
           <div className="space-y-3 min-h-[220px]">

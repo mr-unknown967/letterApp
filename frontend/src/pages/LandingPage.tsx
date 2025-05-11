@@ -38,7 +38,12 @@ const LandingPage = () => {
         const validNames = JSON.parse(import.meta.env.VITE_VALID_USERNAMES || '[]');
         const expectedDOB = import.meta.env.VITE_USER_DOB;
         
-        if (!validNames.includes(normalizedName) || dob !== expectedDOB) {
+        // Check if the normalized name matches any valid name
+        const isNameValid = validNames.some((validName: string) => 
+          validName.toLowerCase().trim() === normalizedName
+        );
+        
+        if (!isNameValid || dob !== expectedDOB) {
           setError('Please check your information and try again.');
           toast({
             variant: "destructive",
@@ -49,39 +54,38 @@ const LandingPage = () => {
         }
 
         const response = await apiRequest('POST', '/api/validate', { name, dob });
-        const data = await response.json();
-        
-        if (data.success) {
-          sessionStorage.setItem('userName', name);
-          toast({
-            title: "Validation successful! ✨",
-            description: "Preparing your special message...",
-            duration: 2000,
-          });
-          setShowHearts(true);
-          setTimeout(() => {
-            navigate('/message');
-          }, 1800);
-        } else {
+      const data = await response.json();
+      
+      if (data.success) {
+        sessionStorage.setItem('userName', name);
+        toast({
+          title: "Validation successful! ✨",
+          description: "Preparing your special message...",
+          duration: 2000,
+        });
+        setShowHearts(true);
+        setTimeout(() => {
+          navigate('/message');
+        }, 1800);
+      } else {
           setError(data.message || 'Please check your information and try again.');
-          toast({
-            variant: "destructive",
-            title: "Validation failed",
-            description: data.message || 'Please check your information and try again.',
-          });
-        }
-      } catch (error) {
-        console.error('Validation error:', error);
-        setError('Something went wrong. Please try again.');
         toast({
           variant: "destructive",
-          title: "Error",
-          description: "Something went wrong. Please try again.",
+          title: "Validation failed",
+            description: data.message || 'Please check your information and try again.',
         });
+      }
+    } catch (error) {
+      setError('Something went wrong. Please try again.');
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+      });
       } finally {
         setIsValidating(false);
       }
-    }, 300), // Reduced debounce time from 500ms to 300ms
+    }, 300),
     [toast, navigate]
   );
 

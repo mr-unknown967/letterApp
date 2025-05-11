@@ -261,7 +261,7 @@ const QuestionsPage = () => {
             <p className={`text-primary-600 font-medium mt-3 md:mt-4 text-sm sm:text-base transition-all duration-1000 delay-[600ms] ${
               isAnimated ? 'opacity-80 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>
-              Agar aapko kuch bhi bolna ya puchna hai bejhi-jak niche likh do. <br />
+              Agar aapko kuch bhi bolna ya puchna hai bejhi-jak niche likh do.<br />
             </p>
           </div>
 
@@ -270,10 +270,13 @@ const QuestionsPage = () => {
             <div className={`input-container transition-all duration-1000 delay-[800ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>
+              
               <Label htmlFor="additionalInfo" className="block mb-2 text-sm sm:text-base font-medium text-gray-800">
               
               </Label>
+              <span className="text-red-600 ml-1 font-dancing">*Required</span> {/* This represents "Required" */}
               <Textarea
+              
                 id="additionalInfo"
                 name="additionalInfo"
                 value={formData.additionalInfo}
@@ -281,10 +284,11 @@ const QuestionsPage = () => {
                 className="form-input text-sm sm:text-base border-2 border-primary-200 focus:border-primary-500 min-h-[100px] bg-pink-50 hover:bg-pink-100 transition-all duration-300"
                 placeholder="Feel free to share your thoughts or questions here..."
                 rows={3}
+
               />
 
               <p className={`mt-4  text-sm sm:text-base italic transition-all duration-1000 ${isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'}`}>
-                Kabhi bhi aapko zarurat ho to, just reach out to me here— I'm always there for you.
+                Aur haa kabhi bhi aapko zarurat ho to, just reach out to me here— I'm always there for you.
               </p>
 
 

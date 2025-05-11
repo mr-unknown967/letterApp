@@ -1,10 +1,17 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
+// Debug environment variables
+console.log('Environment variables:', {
+  VITE_API_URL: import.meta.env.VITE_API_URL,
+  NODE_ENV: import.meta.env.MODE
+});
+
 if (!import.meta.env.VITE_API_URL) {
   throw new Error('VITE_API_URL environment variable is not set');
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL.trim();
+// Ensure the API URL is properly formatted
+const API_BASE_URL = import.meta.env.VITE_API_URL.trim().replace(/\/$/, '');
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -21,27 +28,27 @@ export async function apiRequest(
   // Ensure URL starts with API base URL and remove any double slashes
   const fullUrl = url.startsWith('http') 
     ? url 
-    : `${API_BASE_URL.replace(/\/$/, '')}/${url.replace(/^\//, '')}`;
-  
-  // Debug log
-  console.log('Making API request:', {
-    method,
-    url: fullUrl,
-    data
-  });
+    : `${API_BASE_URL}/${url.replace(/^\//, '')}`;
 
   try {
-    const res = await fetch(fullUrl, {
-      method,
-      headers: data ? { "Content-Type": "application/json" } : {},
-      body: data ? JSON.stringify(data) : undefined,
-      credentials: 'include'
-    });
+  const res = await fetch(fullUrl, {
+    method,
+      headers: {
+        ...(data ? { "Content-Type": "application/json" } : {}),
+        "Accept": "application/json"
+      },
+    body: data ? JSON.stringify(data) : undefined,
+      credentials: 'include',
+      mode: 'cors'
+  });
 
-    await throwIfResNotOk(res);
-    return res;
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`API request failed: ${res.status} ${res.statusText} - ${errorText}`);
+    }
+
+  return res;
   } catch (error) {
-    console.error('API request failed:', error);
     throw error;
   }
 }

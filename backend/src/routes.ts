@@ -128,17 +128,46 @@ interface TrackingData {
   };
 }
 
-// Configure nodemailer with connection pooling
+// Configure nodemailer with optimized settings
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   pool: true,
-  maxConnections: 5,
+  maxConnections: 10,
   maxMessages: 100,
+  rateDelta: 1000, // Minimum time between messages
+  rateLimit: 5, // Max messages per rateDelta
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
+  },
+  tls: {
+    rejectUnauthorized: false // Skip certificate validation for faster connection
   }
 });
+
+// Cache for email sending status
+const emailCache = new Map<string, { status: 'success' | 'error', timestamp: number }>();
+const EMAIL_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+// Optimized email sending function
+async function sendEmail(mailOptions: any) {
+  const cacheKey = JSON.stringify(mailOptions);
+  const cachedResult = emailCache.get(cacheKey);
+  
+  if (cachedResult && Date.now() - cachedResult.timestamp < EMAIL_CACHE_TTL) {
+    return cachedResult.status === 'success';
+  }
+
+  try {
+    await transporter.sendMail(mailOptions);
+    emailCache.set(cacheKey, { status: 'success', timestamp: Date.now() });
+    return true;
+  } catch (error) {
+    console.error('Error sending email:', error);
+    emailCache.set(cacheKey, { status: 'error', timestamp: Date.now() });
+    return false;
+  }
+}
 
 // Track visits route
 router.get('/track', async (req, res) => {
@@ -389,10 +418,10 @@ router.post('/validate', rateLimitMiddleware, async (req, res) => {
   }
 });
 
-// Submit response route
+// Submit response route with optimized email handling
 router.post('/submit', async (req, res) => {
-    try {
-      // Validate request body
+  try {
+    // Validate request body
     const validatedData = ResponseSchema.parse(req.body);
       
     // Save to database
@@ -401,29 +430,44 @@ router.post('/submit', async (req, res) => {
       return res.status(500).json({ error: result.error });
     }
 
-    // Send email notification
-        const mailOptions = {
-          from: process.env.EMAIL_USER,
+    // Prepare email options
+    const mailOptions = {
+      from: {
+        name: 'Letter App',
+        address: process.env.EMAIL_USER || ''
+      },
       to: process.env.RECEIVER_EMAIL,
       subject: 'New Response from Zubiyah',
-      text: `💌 New Response from Zubiyah
+      text: `💌 New Response from Zubiyah\n\n💭 Message:\n${validatedData.additionalInfo}\n\nReceived on (IST): ${getISTTimestamp()}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #e91e63;">💌 New Response from Zubiyah</h2>
+          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p style="margin: 0;"><strong>Message:</strong></p>
+            <p style="margin: 10px 0;">${validatedData.additionalInfo}</p>
+          </div>
+          <p style="color: #666; font-size: 14px;">Received on (IST): ${getISTTimestamp()}</p>
+        </div>
+      `,
+      headers: {
+        'X-Priority': '1',
+        'X-MSMail-Priority': 'High',
+        'Importance': 'high'
+      }
+    };
 
-💭 Message:
-${validatedData.additionalInfo}
-
-Received on (IST): ${getISTTimestamp()}`
-        };
-        
-          await transporter.sendMail(mailOptions);
-      
+    // Send email asynchronously without awaiting
+    sendEmail(mailOptions).catch(console.error);
+    
+    // Respond immediately without waiting for email
     res.json({ success: true, message: 'Response submitted successfully' });
-    } catch (error) {
+  } catch (error) {
     console.error('Error in submit route:', error);
     res.status(400).json({ 
       error: error instanceof Error ? error.message : 'Invalid request data'
-      });
-    }
-  });
+    });
+  }
+});
 
 // Get responses route
 router.get('/responses', async (req, res) => {
@@ -436,7 +480,7 @@ router.get('/responses', async (req, res) => {
   } catch (error) {
     console.error('Error in get responses route:', error);
     res.status(500).json({ error: 'Failed to fetch responses' });
-}
+  }
 });
 
 export default router;
