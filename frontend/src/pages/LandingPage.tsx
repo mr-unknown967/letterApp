@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
@@ -17,6 +17,22 @@ const LandingPage = () => {
   const [showHearts, setShowHearts] = useState(false);
   const [isValidating, setIsValidating] = useState(false);
 
+  // Memoize validation values
+  const validNames = useMemo(() => 
+    JSON.parse(import.meta.env.VITE_VALID_USERNAMES || '[]').map((name: string) => name.toLowerCase().trim()),
+    []
+  );
+  const expectedDOB = useMemo(() => import.meta.env.VITE_USER_DOB, []);
+
+  // Optimized validation function
+  const validateInput = useCallback((name: string, dob: string) => {
+    const normalizedName = name.toLowerCase().trim();
+    return {
+      isValidName: validNames.includes(normalizedName),
+      isValidDOB: dob === expectedDOB
+    };
+  }, [validNames, expectedDOB]);
+
   useEffect(() => {
     // Start the animations after a small delay
     const timer = setTimeout(() => {
@@ -34,59 +50,58 @@ const LandingPage = () => {
       setIsValidating(true);
       try {
         // Quick client-side validation before API call
-        const normalizedName = name.toLowerCase().trim();
-        const validNames = JSON.parse(import.meta.env.VITE_VALID_USERNAMES || '[]');
-        const expectedDOB = import.meta.env.VITE_USER_DOB;
+        const { isValidName, isValidDOB } = validateInput(name, dob);
         
-        // Check if the normalized name matches any valid name
-        const isNameValid = validNames.some((validName: string) => 
-          validName.toLowerCase().trim() === normalizedName
-        );
-        
-        if (!isNameValid || dob !== expectedDOB) {
-          setError('Please check your information and try again.');
+        if (!isValidName || !isValidDOB) {
+          const errorMessage = !isValidName && !isValidDOB 
+            ? 'Both name and date of birth are incorrect'
+            : !isValidName 
+              ? 'Name is incorrect'
+              : 'Date of birth is incorrect';
+          
+          setError(errorMessage);
           toast({
             variant: "destructive",
             title: "Validation failed",
-            description: "Please check your information and try again.",
+            description: errorMessage,
           });
           return;
         }
 
         const response = await apiRequest('POST', '/api/validate', { name, dob });
-      const data = await response.json();
+        const data = await response.json();
       
-      if (data.success) {
-        sessionStorage.setItem('userName', name);
-        toast({
-          title: "Validation successful! ✨",
-          description: "Preparing your special message...",
-          duration: 2000,
-        });
-        setShowHearts(true);
-        setTimeout(() => {
-          navigate('/message');
-        }, 1800);
-      } else {
+        if (data.success) {
+          sessionStorage.setItem('userName', name);
+          toast({
+            title: "Validation successful! ✨",
+            description: "Preparing your special message...",
+            duration: 2000,
+          });
+          setShowHearts(true);
+          setTimeout(() => {
+            navigate('/message');
+          }, 1800);
+        } else {
           setError(data.message || 'Please check your information and try again.');
+          toast({
+            variant: "destructive",
+            title: "Validation failed",
+            description: data.message || 'Please check your information and try again.',
+          });
+        }
+      } catch (error) {
+        setError('Something went wrong. Please try again.');
         toast({
           variant: "destructive",
-          title: "Validation failed",
-            description: data.message || 'Please check your information and try again.',
+          title: "Error",
+          description: "Something went wrong. Please try again.",
         });
-      }
-    } catch (error) {
-      setError('Something went wrong. Please try again.');
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Something went wrong. Please try again.",
-      });
       } finally {
         setIsValidating(false);
       }
     }, 300),
-    [toast, navigate]
+    [toast, navigate, validateInput]
   );
 
   const handleSubmit = async (e: React.FormEvent) => {

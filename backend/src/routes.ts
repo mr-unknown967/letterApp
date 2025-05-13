@@ -9,7 +9,7 @@ const router = express.Router();
 const TRACKING_FILE = join(process.cwd(), 'data', 'tracking.json');
 
 // Parse environment variables once at startup
-const validNames = JSON.parse(process.env.VALID_USERNAMES || '[]').map((name: string) => name.toLowerCase().trim());
+const validNames = new Set(JSON.parse(process.env.VALID_USERNAMES || '[]').map((name: string) => name.toLowerCase().trim()));
 const expectedDOB = process.env.USER_DOB || '';
 
 if (!expectedDOB) {
@@ -17,16 +17,29 @@ if (!expectedDOB) {
   process.exit(1);
 }
 
-// Enhanced cache with better memory management
+// Enhanced cache with better memory management and faster lookups
 class EnhancedCache {
   private cache: Map<string, { value: any; expiry: number }>;
   private ttl: number;
   private maxSize: number;
+  private cleanupInterval: NodeJS.Timeout;
 
   constructor(ttlSeconds: number, maxSize: number) {
     this.cache = new Map();
     this.ttl = ttlSeconds * 1000;
     this.maxSize = maxSize;
+    
+    // Periodic cleanup to prevent memory leaks
+    this.cleanupInterval = setInterval(() => this.cleanup(), 60000); // Cleanup every minute
+  }
+
+  private cleanup(): void {
+    const now = Date.now();
+    for (const [key, value] of this.cache.entries()) {
+      if (now > value.expiry) {
+        this.cache.delete(key);
+      }
+    }
   }
 
   set(key: string, value: any): void {
@@ -59,10 +72,15 @@ class EnhancedCache {
   clear(): void {
     this.cache.clear();
   }
+
+  destroy(): void {
+    clearInterval(this.cleanupInterval);
+    this.clear();
+  }
 }
 
-// Initialize enhanced cache with 10 minutes TTL and max 1000 entries
-const validationCache = new EnhancedCache(600, 1000);
+// Initialize validation cache with 5 minute TTL and max 1000 entries
+const validationCache = new EnhancedCache(300, 1000);
 
 // Simple rate limiter
 class RateLimiter {
@@ -383,8 +401,8 @@ router.post('/validate', rateLimitMiddleware, async (req, res) => {
       return res.json(cachedResult);
     }
   
-    // Quick validation without string operations
-    const isValidName = validNames.includes(name.toLowerCase().trim());
+    // Quick validation using Set for O(1) lookup
+    const isValidName = validNames.has(name.toLowerCase().trim());
     const isValidDOB = dob === expectedDOB;
     
     // Prepare response
