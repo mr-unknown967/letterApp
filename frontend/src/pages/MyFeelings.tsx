@@ -236,23 +236,30 @@ const MyFeelings = () => {
 
             <p className={`mb-3 md:mb-4 leading-relaxed font-semibold transition-all duration-1000 delay-[2800ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>I don't know what I mean to you, or if I even mean anything to you. But the only thing I know is that you mean everything to me</p>
+            }`}>I don't know what I mean to you, or if I even mean anything to you. But the only thing I know is that you mean everything to me
+            </p>
 
             <p className={`mb-3 md:mb-4 leading-relaxed transition-all duration-1000 delay-[3000ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>meku aap se bepanah mohabbat hai...</p>
+            }`}>Mai aise to propose nai karna chahata tha magar, I had no choice..</p>
 
             <p className={`mb-3 md:mb-4 leading-relaxed transition-all duration-1000 delay-[3200ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Aise to propose nai karna chahata tha magar, I had no choice..</p>
-
+            }`}>meku aap se bepanah mohabbat hai... <br />
+                Aap se jitna dur rahene ki koosish karta hoon na, uthna hi aap ke liye meri mohabbat badne lagti hai. <br />
+                Shayad aap kabhi nai samaj sakte ki, aap mere liye kitne important hai. <br />
+                Bas aap "Haa" boldo bakhi sab mai sambhal leton
+            
+            </p>
             <p className={`mb-3 md:mb-4 leading-relaxed text-pink-500 font-semibold transition-all duration-1000 delay-[3400ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>I love you.</p>
+            }`}>I love you. I love so much. <br />
+            </p>
 
             <p className={`mb-3 md:mb-4 leading-relaxed transition-all duration-1000 delay-[3600ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Chahe aapka jawaab jo kuch bhi hoo, lekin aapke liye meri mohabbat kabhi kam nai hoti. Waise to 2 saal se to interaz karon aur 1 saal hai, woh 1 saal bhi karleton... Bakhi aap ki aur allaha ki marzi.</p>
+            }`}>Chahe aapka jawaab jo kuch bhi hoo, lekin aapke liye meri mohabbat kabhi kam nai hoti. <br />
+             Waise to 2 saal se to interaz karon aur 1 saal hai, woh 1 saal bhi karleton... Bakhi aap ki aur allaha ki marzi.</p>
 
             <p className={`mb-3 md:mb-4 leading-relaxed transition-all duration-1000 delay-[3800ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
