@@ -60,7 +60,7 @@ letter-main/
 
 3. Create a `.env` file with the following variables:
    ```
-   VITE_API_URL=http://localhost:3000/api
+   VITE_API_URL=http://localhost:5000/api
    VITE_VALID_USERNAMES=["username1","username2"]
    VITE_USER_DOB=YYYY-MM-DD
    VITE_VALID_EMAIL_PATTERN=^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
