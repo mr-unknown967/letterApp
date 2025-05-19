@@ -252,16 +252,16 @@ const QuestionsPage = () => {
               <Heart className="h-16 w-16 text-red-500 animate-pulse" fill="currentColor" />
               <Heart className="h-16 w-16 text-red-600 absolute top-0 left-0 animate-ping opacity-70" />
             </div>
-            <h2 className={`font-dancing text-3xl sm:text-4xl font-bold text-pink-700 mb-2 transition-all duration-1000 delay-[200ms] ${
+            {/* <h2 className={`font-dancing text-3xl sm:text-4xl font-bold text-pink-700 mb-2 transition-all duration-1000 delay-[200ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>Let's Connect</h2>
+            }`}>Let's Connect</h2> */}
             {/* <p className={`text-gray-600 text-sm sm:text-base transition-all duration-1000 delay-[400ms] ${
               isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
             }`}>I'd love to get to know you better</p> */}
             <p className={`text-primary-600 font-medium mt-3 md:mt-4 text-sm sm:text-base transition-all duration-1000 delay-[600ms] ${
               isAnimated ? 'opacity-80 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-            }`}>
-              Agar aapko kuch bhi bolna ya puchna hai bejhi-jak niche likh do.<br />
+            }`}>Aap ke jawab ka interaz hai. <br />
+                Aur haa agar aapko kuch bhi bolna ya puchna hai to, bejhi-jak niche likh do.<br />
             </p>
           </div>
 
@@ -288,7 +288,7 @@ const QuestionsPage = () => {
               />
 
               <p className={`mt-4  text-sm sm:text-base italic transition-all duration-1000 ${isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'}`}>
-                Aur haa kabhi bhi aapko zarurat ho to, just reach out to me here— I'm always there for you.
+                Aur haa agar aapko kabhi bhi aur kuch bhi zarurat ho to, just reach out to me here— I'm always there for you.
               </p>
 
 

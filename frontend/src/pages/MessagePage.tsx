@@ -53,11 +53,12 @@ const MessagePage = () => {
   // Custom message for Zubiyah
   const paragraphs = [
     <span className="font-semibold">"Assalam walaikum."</span>,
-    "I want to start by telling you something — I actually wanted to give you this letter before the annual day. I had planned it all, but for some reason, I couldn’t. It was supposed to be a love letter…but more than that, I just want to say sorry.",
-    "I'm truly sorry for the things I did, the things I said,",
+    "I want to start by telling you something — I actually wanted to give you this letter before the annual day, but for some reason, I couldn’t.",
+    "I’m Sorry for sending it like this. I wanted to give it to you personally, but due to some circumstances, I couldn’t. Before, it was supposed to be a love letter… but now, more than that, I just want to say sorry.",
+    "I'm truly sorry for the things I said, the things I did",
     "Agar kabhi aap ka dil dukhaya hoon,",
-    "Meri wajha se  aapku koi bhi taklif hui ho to",
-    "Ya phir mere wajha se kabhi bhi aapke friends ke samne aapko awkward ya embarrassed feel hua to sorry",
+    "Ya phir Meri wajha se  aapku koi bhi taklif hui ho to",
+    "Ya phir mere wajha se kabhi bhi aapke friends ke samne aapko bura ya embarrassed feel hua to I'm really sorry",
     "Ye sab karne ka mera intension nai tha,",
     "I just wanted to confess my feelings.",
     <span className="font-semibold">Just a humble request—if your heart allows, Please read the letter I’ve written for you. I’ve shared my feelings and thoughts about you, and it would truly mean a lot if you could give it a moment of your time</span>,

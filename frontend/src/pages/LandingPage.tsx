@@ -178,9 +178,13 @@ const LandingPage = () => {
         </div>
         
         <h1 className="text-4xl font-bold text-center mb-2 mt-4">
-          <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-            A message
-          </span>
+          <div className="bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+            A message <br />
+            <span className="mt-8 text-center">
+              <p className="text-sm text-gray-500 animate-pulse">✨ Something awaits you ✨  
+              </p>
+            </span>
+          </div>
         </h1> <br />
         {/* <p className="text-gray-600 text-center mb-8 animate-shimmer">is waiting for you</p> */}
         
@@ -261,10 +265,13 @@ const LandingPage = () => {
             )}
           </button>
         </form>
-        
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500 animate-pulse">✨ Something awaits you ✨</p>
-        </div>
+        <p className={`text-sm mt-4 text-gray-700 italic transition-all duration-1000 delay-[4400ms] ${
+        isAnimated ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
+        }`}>
+          P.S. I'm not sure if this letter will ever reach you, but if it does, I hope you'll take a moment to read it.<br />
+            Please keep it to yourself—it was meant only for you.<br />
+          If it’s your first login, it might take a moment to load.
+        </p>
       </div>
     </div>
   );

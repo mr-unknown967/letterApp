@@ -105,6 +105,7 @@ letter-main/
 - `SESSION_SECRET`: Secret for session management
 - `VALID_USERNAMES`: JSON array of valid usernames
 - `USER_DOB`: Expected date of birth (YYYY-MM-DD)
+### Optional
 - `VALID_EMAIL_PATTERN`: Regex pattern for email validation
 - `MIN_NAME_LENGTH`: Minimum length for names
 - `MAX_NAME_LENGTH`: Maximum length for names
@@ -115,6 +116,7 @@ letter-main/
 - `VITE_API_URL`: Backend API URL
 - `VITE_VALID_USERNAMES`: JSON array of valid usernames
 - `VITE_USER_DOB`: Expected date of birth (YYYY-MM-DD)
+### Optional
 - `VITE_VALID_EMAIL_PATTERN`: Regex pattern for email validation
 - `VITE_MIN_NAME_LENGTH`: Minimum length for names
 - `VITE_MAX_NAME_LENGTH`: Maximum length for names
